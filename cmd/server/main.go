@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/http"
+
+	transportHTTP "github.com/gautampgit/Golang-RESTApi/internal/transprt/http"
 )
 
 //App - struct to declare pointer
@@ -12,6 +15,12 @@ type App struct{}
 //Run functions sets up the application
 func (a *App) Run() error {
 	fmt.Println("Setting up our App")
+	handler := transportHTTP.NewHandler()
+	handler.SetupRoutes()
+	if err := http.ListenAndServe(":8080", handler.Router); err != nil {
+		log.Println("Unable to start the server")
+		return err
+	}
 	return nil
 }
 
