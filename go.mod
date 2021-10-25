@@ -1,4 +1,4 @@
-module gautampgit/Golang-RESTApi
+module github.com/gautampgit/Golang-RESTApi
 
 go 1.17
 

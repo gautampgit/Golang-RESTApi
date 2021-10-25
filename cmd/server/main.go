@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	transportHTTP "github.com/gautampgit/Golang-RESTApi/internal/transprt/http"
+	transportHTTP "github.com/gautampgit/Golang-RESTApi/internal/transport/http"
 )
 
 //App - struct to declare pointer
@@ -26,8 +26,8 @@ func (a *App) Run() error {
 
 func main() {
 	fmt.Println("API v1.0")
-
-	if err := App.Run(); err != nil {
+	app := App{}
+	if err := app.Run(); err != nil {
 		log.Println("Uanble to start the REST API", err)
 	}
 }
