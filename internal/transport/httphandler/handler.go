@@ -1,4 +1,4 @@
-package http
+package httphandler
 
 import (
 	"fmt"
@@ -8,14 +8,9 @@ import (
 	"github.com/gorilla/mux"
 )
 
-//HAndler type stores pointer to the comments service
+//Handler type stores pointer to the comments service
 type Handler struct {
 	Router *mux.Router
-}
-
-//NewHandler returns a pointer to a handler
-func NewHandler() *Handler {
-	return &Handler{}
 }
 
 //SetupRoutes method sets all the routes of the app
@@ -25,4 +20,9 @@ func (h *Handler) SetupRoutes() {
 	h.Router.HandleFunc("/api/health", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "I'm alive !")
 	})
+}
+
+//NewHandler returns a pointer to a handler
+func NewHandler() *Handler {
+	return &Handler{}
 }
