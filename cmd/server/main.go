@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gautampgit/Golang-RESTApi/internal/comment"
+	"github.com/gautampgit/Golang-RESTApi/internal/database"
 	"github.com/gautampgit/Golang-RESTApi/internal/transport/httphandler"
 )
 
@@ -15,7 +17,15 @@ type App struct{}
 //Run functions sets up the application
 func (a *App) Run() error {
 	fmt.Println("Setting up our App")
-	handler := httphandler.NewHandler()
+
+	db, err := database.NewDatabase()
+
+	if err != nil {
+		panic(err)
+	}
+	service := comment.NewService(db)
+
+	handler := httphandler.NewHandler(*service)
 	handler.SetupRoutes()
 	if err := http.ListenAndServe(":8080", handler.Router); err != nil {
 		log.Println("Unable to start the server")
