@@ -23,6 +23,12 @@ func (a *App) Run() error {
 	if err != nil {
 		panic(err)
 	}
+
+	err = database.MigrateDB(db)
+	if err != nil {
+		panic(err)
+	}
+
 	service := comment.NewService(db)
 
 	handler := httphandler.NewHandler(*service)
